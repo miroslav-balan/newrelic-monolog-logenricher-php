@@ -29,7 +29,7 @@ class Handler extends AbstractHandler
      *
      * @param array $record
      */
-    protected function write(array $record): void
+    protected function write(\Monolog\LogRecord $record): void
     {
         $this->send($record["formatted"]);
     }
