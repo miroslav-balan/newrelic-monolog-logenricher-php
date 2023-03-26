@@ -56,11 +56,18 @@ abstract class AbstractFormatter extends JsonFormatter
                 $data = array_merge($data->context, $data['extra']['newrelic-context']);
                 unset($data['extra']['newrelic-context']);
             }
-            $data->timestamp = intval(
-                isset($data['datetime']) ?
-                    $data['datetime']->format('U.u') * 1000 :
-                    (new \DateTime())->format('U.u') * 1000
-            );
+
+            if(is_array($data)){
+                $data['timestamp'] = intval(
+                    $data['datetime']->format('U.u') * 1000
+                );
+            }
+
+            if(!is_array($data)){
+                $data->timestamp = intval(
+                    $data->datetime->format('U.u') * 1000
+                );
+            }
         }
         return parent::normalize($data, $depth);
     }
