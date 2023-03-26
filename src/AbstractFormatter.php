@@ -57,7 +57,9 @@ abstract class AbstractFormatter extends JsonFormatter
                 unset($data['extra']['newrelic-context']);
             }
             $data->timestamp = intval(
-                $data->datetime->format('U.u') * 1000
+                $data->datetime ?
+                    $data->datetime->format('U.u') * 1000 :
+                    (new \DateTime())->format('U.u') * 1000
             );
         }
         return parent::normalize($data, $depth);
