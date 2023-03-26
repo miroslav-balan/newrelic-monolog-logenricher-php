@@ -49,14 +49,14 @@ abstract class AbstractFormatter extends JsonFormatter
      * @param int $depth
      * @return mixed
      */
-    protected function normalize($data, $depth = 0)
+    protected function normalize(mixed $data, int $depth = 0): mixed
     {
         if ($depth == 0) {
             if (isset($data['extra']['newrelic-context'])) {
                 $data = array_merge($data, $data['extra']['newrelic-context']);
                 unset($data['extra']['newrelic-context']);
             }
-            $data['timestamp'] = intval(
+            $data->timestamp = intval(
                 $data['datetime']->format('U.u') * 1000
             );
         }
