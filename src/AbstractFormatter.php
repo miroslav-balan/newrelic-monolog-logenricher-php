@@ -57,7 +57,7 @@ abstract class AbstractFormatter extends JsonFormatter
                 unset($data['extra']['newrelic-context']);
             }
 
-            if(is_array($data)){
+            if(is_array($data) && isset($data['datetime'])){
                 $data['timestamp'] = intval(
                     $data['datetime']->format('U.u') * 1000
                 );
