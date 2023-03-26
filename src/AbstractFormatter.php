@@ -53,7 +53,7 @@ abstract class AbstractFormatter extends JsonFormatter
     {
         if ($depth == 0) {
             if (isset($data['extra']['newrelic-context'])) {
-                $data = array_merge($data, $data['extra']['newrelic-context']);
+                $data = array_merge($data->context, $data['extra']['newrelic-context']);
                 unset($data['extra']['newrelic-context']);
             }
             $data->timestamp = intval(
